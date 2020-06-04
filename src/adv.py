@@ -1,4 +1,4 @@
-from room import Room
+import room from Room
 
 # Declare all the rooms
 
