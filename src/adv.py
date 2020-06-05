@@ -1,5 +1,6 @@
-import room from Room
-
+from room import Room
+from player import Player
+import textwrap
 # Declare all the rooms
 
 room = {
@@ -36,8 +37,22 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+def try_direction(player, direction):
+    attribute = direction + '_to'
+
+#hasattr is method to check is class has attribute
+    if hasattr(player.location, attribute):
+        #getattr fetches value associated with the attribute and updates location
+        player.location = getattr(player.location, attribute)
+    else:
+            print("There's nothing in that direction!")
+
 
 # Make a new player object that is currently in the 'outside' room.
+#ask to enter a name for player and then setting it outside or starting point 
+player_name = input('Enter your name: ')
+player_one = Player(player_name, room['outside'])
+
 
 # Write a loop that:
 #
@@ -49,3 +64,30 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while True:
+    print("\n")
+    print(player_one.location)
+
+    first_char = input("\nfirst_char: ").strip().lower().split()
+    first_one = first_char[0]
+    first_char = first_one[0]
+
+    if first_char == 'q':
+        break
+
+    if first_char == 'n':
+        #if input is n, move player to north position
+        try_direction(player_one, first_char)
+
+    elif first_char == "s":
+        #if input is s, move player to south position
+        try_direction(player_one, first_char)
+
+    elif first_char == 'e':
+        #if input is e move player to east position
+        try_direction(player_one, first_char)
+        
+    elif first_char == 'w':
+
+        try_direction(player_one, first_char)
