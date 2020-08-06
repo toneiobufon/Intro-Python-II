@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -36,8 +37,20 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+def what_way(player, direction):
+    attribute = direction + '_to'
+
+#we use the hasattr method to check a class has attributes
+    if hasattr(player.location, attribute):
+        #the getattr fetches the value associated and updates location
+        player.location = getattr(player.location, attribute)
+    else:
+        print(" \nTry again, there is nothing in that direction ")
 
 # Make a new player object that is currently in the 'outside' room.
+#starting point is outside the game, ask player to input a name 
+player_name = input('Welcome to the game! Enter your name : ')
+player_first = Player(player_name, room['outside'])
 
 # Write a loop that:
 #
@@ -49,3 +62,28 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while True:
+    #to start at a new line
+    print('\n')
+    print(f"{player_name}, Welcome to {player_first.location}")
+
+
+    first_char = input("\n Which way do you want to go? ").strip().lower().split()
+    first_one = first_char[0]
+    first_char = first_one[0]
+
+    if first_char == 'q':
+        break
+    if first_char == 'n': #if the first character in the input is n, move north
+        what_way(player_first, first_char)
+    elif first_char == 's': #if first character in input is s, move south
+        what_way(player_first, first_char)
+    elif first_char == 'e': # if first character is e, move east
+        what_way(player_first, first_char)
+    elif first_char == 'w':# if first char is w, move west
+        what_way(player_first, first_char)
+    else: 
+        print(" \nTry again, there is nothing in that direction ")
+
+
