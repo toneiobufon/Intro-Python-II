@@ -69,11 +69,12 @@ while True:
     print(f"{player_name}, Welcome to {player_first.location}")
 
 
-    first_char = input("\n Which way do you want to go? ").strip().lower().split()
+    first_char = input("\nWhich way do you want to go? ").strip().lower().split()
     first_one = first_char[0]
     first_char = first_one[0]
 
     if first_char == 'q':
+        print(f"Bye! \n")
         break
     if first_char == 'n': #if the first character in the input is n, move north
         what_way(player_first, first_char)
